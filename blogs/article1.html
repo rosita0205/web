@@ -239,7 +239,35 @@
 </body>
 </html>
 
+<!--  function to submit form to mailchimp -->
+<script>
+document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
+
+    const email = document.getElementById('mce-EMAIL').value;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if (!emailRegex.test(email)) {
+       // Show error message
+       alert('Please enter a valid email address');
+       return;
+   }
+
+    // Hide the form
+    document.getElementById('subscription-form').style.display = 'none';
+
+    // Show the success message
+    document.getElementById('success-message').style.display = 'block';
+
+    // Optional: Submit to Mailchimp
+    const formData = new FormData(this);
+    fetch('https://barbaramartinezpedroso.us16.list-manage.com/subscribe/post?u=16406ef4a6e964dbbb71016b8&amp;id=a6ae8a1d37&amp;f_id=008937e0f0', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+    });
+});
 
 <script>
 function shareOnLinkedIn() {
